@@ -7,7 +7,6 @@ import { logout, username } from '../composables/useAuth'
 const router = useRouter()
 const nav = [
   { to: '/', label: 'Kryefaqja', icon: 'home' },
-  { to: '/dergo', label: 'Dërgo File', icon: 'upload' },
   { to: '/files', label: 'File-t e mia', icon: 'folder' },
   { to: '/historia', label: 'Historia', icon: 'clock' }
 ]

@@ -17,7 +17,7 @@ const submit = async () => {
 <template>
   <div class="flex min-h-screen items-center justify-center p-4">
     <form class="w-full max-w-sm space-y-4 rounded-lg border border-white/10 bg-panel p-8" @submit.prevent="submit">
-      <div class="flex justify-center pb-2"><Logo /></div>
+      <div class="flex justify-center pb-2"><Logo size="w-56" /></div>
       <h1 class="text-center text-xl font-extrabold italic"><span class="text-brand">ECU</span> FILE TRANSFER</h1>
       <input v-model="user" class="field" placeholder="Username" autocomplete="username" required />
       <input v-model="pass" type="password" class="field" placeholder="Fjalëkalimi" autocomplete="current-password" required />

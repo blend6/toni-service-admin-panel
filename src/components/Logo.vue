@@ -1,9 +1,11 @@
-<!-- Zëvendësoje me <img src="/logo.png"> kur ke logon në cilësi të mirë -->
+<script setup>
+defineProps({ size: { type: String, default: 'w-36' } })
+</script>
+
 <template>
-  <div class="select-none text-center leading-none">
-    <div class="text-[11px] tracking-[0.35em] text-gray-300">AUTO ELEKTRO</div>
-    <div class="my-1 text-4xl font-black italic text-brand">TONI</div>
-    <div class="text-[11px] tracking-[0.5em] text-gray-300">SERVIS</div>
-    <div class="mt-1 text-sm font-bold text-brand">048 628 300</div>
-  </div>
+  <img
+    src="/logo.png"
+    alt="Auto Elektro Toni Servis — 048 628 300"
+    :class="['block h-auto object-contain', size]"
+  />
 </template>
