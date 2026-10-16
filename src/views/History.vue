@@ -5,6 +5,8 @@ import { supabase } from '../lib/supabase'
 import { fmtDate, fmtTime } from '../lib/format'
 
 const rows = ref([]), loading = ref(true)
+const actionText = (action) => ({ upload: 'dërgoi', download: 'shkarkoi', edit: 'ndryshoi', delete: 'fshiu' }[action] ?? 'përpunoi')
+const actionIcon = (action) => ({ upload: 'upload', download: 'arrowdown', edit: 'edit', delete: 'trash' }[action] ?? 'file')
 onMounted(async () => {
   const { data } = await supabase.from('activity').select('*').order('created_at', { ascending: false }).limit(300)
   rows.value = data ?? []
@@ -20,8 +22,8 @@ onMounted(async () => {
     <p v-else-if="!rows.length" class="text-sm text-gray-500">Nuk ka veprime ende.</p>
     <ul class="space-y-2">
       <li v-for="r in rows" :key="r.id" class="flex items-center gap-4 rounded-md border border-white/10 bg-panel p-3 text-sm">
-        <Icon :name="r.action === 'upload' ? 'upload' : 'arrowdown'" :size="20" class="text-brand" />
-        <p class="min-w-0 flex-1 truncate"><b class="text-white">{{ r.username }}</b> {{ r.action === 'upload' ? 'dërgoi' : 'shkarkoi' }} <span class="text-gray-300">{{ r.file_name }}</span></p>
+        <Icon :name="actionIcon(r.action)" :size="20" class="text-brand" />
+        <p class="min-w-0 flex-1 truncate"><b class="text-white">{{ r.username }}</b> {{ actionText(r.action) }} <span class="text-gray-300">{{ r.file_name }}</span></p>
         <span class="text-xs text-gray-400">{{ fmtDate(r.created_at) }} · {{ fmtTime(r.created_at) }}</span>
       </li>
     </ul>
