@@ -41,7 +41,7 @@ const features = [
 </script>
 
 <template>
-  <div class="grid gap-4 lg:grid-cols-[2fr_1fr]">
+  <div class="grid h-full gap-4 lg:grid-cols-[2fr_1fr] lg:grid-rows-2">
     <section class="rounded-lg border border-white/10 bg-panel p-4">
       <div
         class="flex min-h-[280px] flex-col items-center justify-center rounded-md border border-dashed p-6 text-center transition"
@@ -83,8 +83,8 @@ const features = [
       </div>
     </section>
 
-    <section class="grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
-      <div v-for="f in features" :key="f.title" class="flex gap-3 bg-panel p-4">
+    <section class="col-span-full grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10">
+      <div v-for="f in features" :key="f.title" class="flex min-h-20 items-center justify-center gap-3 bg-panel p-4 text-center">
         <Icon :name="f.icon" :size="30" class="shrink-0 text-brand" />
         <div><h4 class="text-xs font-bold text-white">{{ f.title }}</h4><p class="mt-1 text-xs text-gray-400">{{ f.text }}</p></div>
       </div>
