@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import Icon from '../components/Icon.vue'
+import Logo from '../components/Logo.vue'
 import { supabase, BUCKET, MAX_SIZE, ALLOWED } from '../lib/supabase'
 import { username } from '../composables/useAuth'
 import { fmtSize } from '../lib/format'
@@ -10,7 +11,7 @@ const file = ref(null), description = ref(''), over = ref(false), busy = ref(fal
 const pick = (f) => {
   msg.value = null
   if (!f) return
-  if (!ALLOWED.includes(f.name.split('.').pop().toLowerCase())) return (msg.value = { ok: false, text: 'Lejohen vetëm file BIN, ORI, MOD dhe ZIP.' })
+  if (ALLOWED.length && !ALLOWED.includes(f.name.split('.').pop().toLowerCase())) return (msg.value = { ok: false, text: 'Lejohen vetëm file BIN, ORI, MOD dhe ZIP.' })
   if (f.size > MAX_SIZE) return (msg.value = { ok: false, text: 'File-i kalon kufirin prej 50 MB.' })
   file.value = f
 }
@@ -52,7 +53,7 @@ const features = [
           <Icon name="upload" :size="56" class="text-brand" />
           <h2 class="mt-3 text-2xl font-extrabold italic text-white">DËRGO FILE ECU</h2>
           <p class="mt-2 text-sm text-gray-400">Tërhiq file-t këtu ose zgjidhi nga kompjuteri</p>
-          <p class="mt-3 text-xs tracking-widest text-gray-500">BIN · ORI · MOD · ZIP</p>
+          <p class="mt-3 text-xs tracking-widest text-gray-500">ÇDO FORMAT</p>
           <button class="btn-red mt-5" @click="input.click()"><Icon name="folder" :size="16" />Zgjidh File</button>
         </template>
         <div v-else class="w-full max-w-md space-y-4 text-left">
@@ -69,17 +70,24 @@ const features = [
           </div>
         </div>
         <p v-if="msg" class="mt-4 text-sm" :class="msg.ok ? 'text-green-400' : 'text-red-400'">{{ msg.text }}</p>
-        <input ref="input" type="file" class="hidden" accept=".bin,.ori,.mod,.zip" @change="pick($event.target.files[0])" />
+        <input ref="input" type="file" class="hidden" @change="pick($event.target.files[0])" />
       </div>
     </section>
 
-    <section class="rounded-lg border border-white/10 bg-panel p-5">
-      <h3 class="mb-3 flex items-center gap-2 font-bold italic text-white"><Icon name="shield" :size="18" />TRANSFER I SIGURT</h3>
-      <p class="mb-6 text-sm text-gray-400">File-t tua transferohen në mënyrë të sigurt me enkriptim të avancuar.</p>
-      <div class="grid grid-cols-3 gap-2 text-center text-xs text-gray-400">
-        <div><Icon name="lock" class="mx-auto mb-1 text-brand" />Enkriptim i avancuar</div>
-        <div><Icon name="home" class="mx-auto mb-1 text-brand" />Në çdo pajisje</div>
-        <div><Icon name="zap" class="mx-auto mb-1 text-brand" />Shpejt &amp; pa probleme</div>
+    <section class="flex min-h-[280px] flex-col justify-between rounded-lg border border-white/10 bg-panel p-5">
+      <div>
+        <h3 class="flex items-center gap-2 font-bold italic text-white"><Icon name="shield" :size="18" class="text-brand" />TRANSFER I SIGURT</h3>
+        <p class="mt-2 text-sm leading-relaxed text-gray-400">File-t tua transferohen në mënyrë të sigurt me enkriptim të avancuar.</p>
+      </div>
+      <div class="my-5 flex justify-center">
+        <div class="rounded-lg border border-white/5 bg-black/40 px-4 py-2 shadow-inner shadow-black/30">
+          <Logo size="w-36 sm:w-40" />
+        </div>
+      </div>
+      <div class="grid grid-cols-3 gap-2 border-t border-white/10 pt-4 text-center text-[11px] leading-tight text-gray-400">
+        <div><Icon name="lock" :size="18" class="mx-auto mb-1 text-brand" />Enkriptim i avancuar</div>
+        <div><Icon name="home" :size="18" class="mx-auto mb-1 text-brand" />Në çdo pajisje</div>
+        <div><Icon name="zap" :size="18" class="mx-auto mb-1 text-brand" />Shpejt &amp; pa probleme</div>
       </div>
     </section>
 

@@ -6,6 +6,6 @@ export const supabase = createClient(
 )
 export const BUCKET = 'ecu-files'
 export const MAX_SIZE = 50 * 1024 * 1024
-export const ALLOWED = ['bin', 'ori', 'mod', 'zip']
+export const ALLOWED = []
 // Supabase Auth kërkon email, ndaj username-i kthehet në një email të brendshëm.
 export const toEmail = (u) => `${u.trim().toLowerCase()}@toni.local`
